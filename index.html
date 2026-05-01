@@ -5,93 +5,95 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>同人価格.com - FANZA×DLsite 価格比較</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif; background: #f7f6f3; color: #1a1a1a; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif; background: #f7f6f3; color: #1a1a1a; }
 
-  header { background: #fff; border-bottom: 1px solid #e5e5e5; padding: 0 24px; position: sticky; top: 0; z-index: 100; }
-  .header-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; }
-  .logo { font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
-  .logo span { color: #e53935; }
-  .logo-sub { font-size: 12px; font-weight: 400; color: #888; margin-left: 8px; }
-  .last-updated { font-size: 12px; color: #aaa; }
+header { background: #fff; border-bottom: 1px solid #e5e5e5; padding: 0 20px; position: sticky; top: 0; z-index: 100; }
+.header-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 52px; }
+.logo { font-size: 20px; font-weight: 700; }
+.logo span { color: #e53935; }
+.logo-sub { font-size: 12px; font-weight: 400; color: #aaa; margin-left: 8px; }
+.header-note { font-size: 11px; color: #bbb; }
 
-  .main { max-width: 1100px; margin: 0 auto; padding: 24px 16px; }
+.main { max-width: 960px; margin: 0 auto; padding: 20px 16px; }
 
-  .stats-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 24px; }
-  .stat-card { background: #fff; border-radius: 10px; border: 1px solid #ececec; padding: 14px 16px; }
-  .stat-label { font-size: 11px; color: #999; margin-bottom: 6px; }
-  .stat-val { font-size: 22px; font-weight: 700; }
-  .stat-val.red { color: #e53935; }
-  .stat-val.blue { color: #1976d2; }
-  .stat-val.green { color: #2e7d32; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; margin-bottom: 20px; }
+.stat { background: #fff; border: 1px solid #ececec; border-radius: 10px; padding: 12px 14px; }
+.stat-label { font-size: 11px; color: #999; margin-bottom: 4px; }
+.stat-val { font-size: 20px; font-weight: 700; }
+.stat-val.red { color: #e53935; }
+.stat-val.blue { color: #1976d2; }
+.stat-val.green { color: #2e7d32; }
 
-  .controls { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; align-items: center; }
-  .tabs { display: flex; gap: 4px; }
-  .tab { padding: 7px 14px; font-size: 13px; border: 1px solid #ddd; border-radius: 20px; cursor: pointer; background: #fff; color: #555; transition: all 0.15s; }
-  .tab:hover { border-color: #aaa; }
-  .tab.active { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
-  .tab.red.active { background: #e53935; border-color: #e53935; }
-  .tab.blue.active { background: #1976d2; border-color: #1976d2; }
-  .tab.orange.active { background: #e65100; border-color: #e65100; }
+.tabs { display: flex; gap: 4px; margin-bottom: 16px; flex-wrap: wrap; }
+.tab { padding: 7px 14px; font-size: 13px; border: 1px solid #ddd; border-radius: 20px; cursor: pointer; background: #fff; color: #555; }
+.tab.active { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
 
-  .filters { display: flex; gap: 8px; margin-left: auto; }
-  select, input[type=text] { font-size: 13px; padding: 7px 10px; border: 1px solid #ddd; border-radius: 8px; background: #fff; color: #1a1a1a; outline: none; }
-  select:focus, input:focus { border-color: #888; }
-  input[type=text] { width: 200px; }
+.note { font-size: 12px; color: #bbb; margin-bottom: 14px; padding: 8px 12px; border-left: 3px solid #e0e0e0; background: #fafafa; border-radius: 0 6px 6px 0; }
 
-  .note { font-size: 12px; color: #bbb; margin-bottom: 14px; padding: 8px 12px; border-left: 3px solid #e0e0e0; background: #fafafa; border-radius: 0 6px 6px 0; }
+.card-list { display: flex; flex-direction: column; gap: 10px; }
+.card { background: #fff; border: 1px solid #ececec; border-radius: 14px; padding: 18px 20px; transition: border-color 0.15s; }
+.card:hover { border-color: #ccc; }
 
-  .item-list { display: flex; flex-direction: column; gap: 8px; }
-  .item-card { background: #fff; border: 1px solid #ececec; border-radius: 12px; padding: 14px 18px; display: flex; gap: 16px; align-items: center; transition: border-color 0.15s, box-shadow 0.15s; }
-  .item-card:hover { border-color: #ccc; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.card-top { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 12px; }
+.rank { font-size: 20px; font-weight: 800; min-width: 30px; text-align: center; padding-top: 2px; color: #ccc; }
+.rank.r1 { color: #f9a825; }
+.rank.r2 { color: #90a4ae; }
+.rank.r3 { color: #a1887f; }
+.thumb { width: 56px; height: 56px; border-radius: 8px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0; }
+.card-info { flex: 1; min-width: 0; }
+.card-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+.card-meta { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.circle { font-size: 12px; color: #888; }
+.genre { font-size: 11px; padding: 2px 8px; border-radius: 4px; background: #f0f0f0; color: #555; }
+.sale-tag { font-size: 11px; padding: 2px 8px; border-radius: 4px; background: #fff3e0; color: #e65100; font-weight: 600; }
 
-  .rank { font-size: 18px; font-weight: 700; color: #ccc; min-width: 28px; text-align: center; }
-  .rank.gold { color: #f9a825; }
-  .rank.silver { color: #90a4ae; }
-  .rank.bronze { color: #a1887f; }
+.price-compare { display: flex; gap: 0; border: 1px solid #ececec; border-radius: 10px; overflow: hidden; }
+.price-side { flex: 1; padding: 12px 16px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.price-side.fanza { background: #fff5f5; }
+.price-side.dlsite { background: #f0f4ff; }
+.price-side.winner { position: relative; }
+.price-side.winner::after { content: '✓ 安い'; position: absolute; top: 6px; right: 8px; font-size: 10px; font-weight: 600; padding: 1px 6px; border-radius: 4px; }
+.price-side.fanza.winner::after { background: #ffcdd2; color: #c62828; }
+.price-side.dlsite.winner::after { background: #bbdefb; color: #1565c0; }
+.price-side.fanza.no-data { background: #fafafa; }
+.price-site { font-size: 12px; font-weight: 600; color: #888; }
+.price-site.fanza { color: #e53935; }
+.price-site.dlsite { color: #1976d2; }
+.price-num { font-size: 20px; font-weight: 800; }
+.price-num.fanza { color: #e53935; }
+.price-num.dlsite { color: #1976d2; }
+.price-num.na { color: #ccc; font-size: 14px; font-weight: 400; }
+.price-orig { font-size: 12px; color: #bbb; text-decoration: line-through; }
+.vs-divider { display: flex; align-items: center; background: #f9f9f9; padding: 0 8px; font-size: 12px; font-weight: 700; color: #ccc; }
 
-  .thumb { width: 60px; height: 60px; border-radius: 8px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+.buy-area { margin-top: 12px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.buy-link { display: inline-flex; align-items: center; gap: 6px; padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; transition: all 0.15s; }
+.buy-link.fanza { background: #e53935; color: #fff; }
+.buy-link.fanza:hover { background: #c62828; }
+.buy-link.dlsite { background: #1976d2; color: #fff; }
+.buy-link.dlsite:hover { background: #1565c0; }
+.save-badge { font-size: 13px; font-weight: 600; color: #2e7d32; background: #e8f5e9; padding: 6px 14px; border-radius: 8px; }
+.same-badge { font-size: 13px; color: #888; background: #f5f5f5; padding: 6px 14px; border-radius: 8px; }
 
-  .info { flex: 1; min-width: 0; }
-  .item-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .item-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
-  .circle-name { font-size: 12px; color: #888; }
-  .genre-badge { font-size: 11px; padding: 2px 8px; border-radius: 4px; font-weight: 500; }
-  .genre-rpg { background: #fce4ec; color: #c62828; }
-  .genre-novel { background: #e8f5e9; color: #2e7d32; }
-  .genre-cg { background: #e3f2fd; color: #1565c0; }
-  .genre-voice { background: #f3e5f5; color: #6a1b9a; }
-  .genre-manga { background: #fff8e1; color: #e65100; }
-  .sale-badge { font-size: 11px; padding: 2px 8px; border-radius: 4px; background: #fff3e0; color: #e65100; font-weight: 600; }
+.loading { text-align: center; padding: 60px 0; }
+.spinner { width: 36px; height: 36px; border: 3px solid #eee; border-top-color: #e53935; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading p { font-size: 14px; color: #888; }
 
-  .prices { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-  .price-block { display: flex; flex-direction: column; gap: 2px; }
-  .price-site { font-size: 11px; color: #aaa; }
-  .price-num { font-size: 16px; font-weight: 700; }
-  .price-num.fanza { color: #e53935; }
-  .price-num.dlsite { color: #1976d2; }
-  .price-num.winner { padding: 2px 8px; border-radius: 6px; }
-  .price-num.winner.fanza { background: #ffebee; }
-  .price-num.winner.dlsite { background: #e3f2fd; }
+.empty { text-align: center; padding: 60px 0; color: #aaa; font-size: 14px; }
+.empty-icon { font-size: 40px; margin-bottom: 12px; }
 
-  .vs { font-size: 12px; color: #ccc; font-weight: 700; }
+.rating { font-size: 12px; color: #f9a825; margin-left: 4px; }
 
-  .diff-area { display: flex; flex-direction: column; gap: 4px; margin-left: 8px; }
-  .diff-save { font-size: 12px; padding: 3px 10px; border-radius: 6px; font-weight: 600; }
-  .diff-save.has-diff { background: #e8f5e9; color: #2e7d32; }
-  .diff-save.no-diff { background: #f5f5f5; color: #aaa; }
-  .diff-winner { font-size: 12px; color: #555; }
-  .diff-winner strong.fanza { color: #e53935; }
-  .diff-winner strong.dlsite { color: #1976d2; }
+.footer { text-align: center; padding: 32px 0; font-size: 12px; color: #bbb; line-height: 1.8; }
 
-  .empty { text-align: center; padding: 48px 0; color: #aaa; font-size: 14px; }
-
-  @media (max-width: 700px) {
-    .stats-row { grid-template-columns: repeat(3, 1fr); }
-    .filters { flex-direction: column; width: 100%; margin-left: 0; }
-    input[type=text] { width: 100%; }
-    .prices { gap: 10px; }
-  }
+@media (max-width: 600px) {
+  .stats { grid-template-columns: repeat(3, 1fr); }
+  .price-compare { flex-direction: column; }
+  .vs-divider { justify-content: center; padding: 4px 0; }
+  .buy-area { flex-direction: column; align-items: flex-start; }
+}
 </style>
 </head>
 <body>
@@ -102,156 +104,177 @@
       <span class="logo">同人価格<span>.com</span></span>
       <span class="logo-sub">FANZA × DLsite 価格比較</span>
     </div>
-    <div class="last-updated">最終更新: 2026/04/13 12:00</div>
+    <div class="header-note" id="updatedAt">読み込み中...</div>
   </div>
 </header>
 
 <div class="main">
+  <div class="stats" id="stats"></div>
 
-  <div class="stats-row">
-    <div class="stat-card"><div class="stat-label">比較作品数</div><div class="stat-val">248</div></div>
-    <div class="stat-card"><div class="stat-label">FANZA安い</div><div class="stat-val red">87</div></div>
-    <div class="stat-card"><div class="stat-label">DLsite安い</div><div class="stat-val blue">103</div></div>
-    <div class="stat-card"><div class="stat-label">同一価格</div><div class="stat-val">58</div></div>
-    <div class="stat-card"><div class="stat-label">平均差額</div><div class="stat-val green">¥132</div></div>
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-tab="all">すべて</button>
+    <button class="tab" data-tab="fanza">FANZA安い</button>
+    <button class="tab" data-tab="dlsite">DLsite安い</button>
+    <button class="tab" data-tab="sale">セール中</button>
   </div>
 
-  <div class="controls">
-    <div class="tabs" id="tabs">
-      <button class="tab active" onclick="setTab('all', this)">すべて</button>
-      <button class="tab red" onclick="setTab('fanza', this)">FANZA安い</button>
-      <button class="tab blue" onclick="setTab('dlsite', this)">DLsite安い</button>
-      <button class="tab orange" onclick="setTab('sale', this)">🏷 セール中</button>
-    </div>
-    <div class="filters">
-      <input type="text" id="search" placeholder="タイトル・サークルで検索" oninput="render()">
-      <select id="genre" onchange="render()">
-        <option value="">全ジャンル</option>
-        <option value="rpg">RPG</option>
-        <option value="novel">ノベル</option>
-        <option value="cg">CG集</option>
-        <option value="voice">音声</option>
-        <option value="manga">マンガ</option>
-      </select>
-      <select id="sort" onchange="render()">
-        <option value="rank">ランキング順</option>
-        <option value="diff_desc">差額が大きい順</option>
-        <option value="price_asc">価格が安い順</option>
-        <option value="price_desc">価格が高い順</option>
-      </select>
+  <div id="content">
+    <div class="loading">
+      <div class="spinner"></div>
+      <p>データを読み込んでいます…</p>
     </div>
   </div>
+</div>
 
-  <div class="note">※ デモデータを表示中。FANZAアフィリエイトAPI・DLsite RSS連携後に実データに切り替わります。</div>
-
-  <div class="item-list" id="list"></div>
+<div class="footer">
+  ※ 価格は税込表示です。最新の価格は各販売サイトでご確認ください。<br>
+  ※ データは毎日自動更新されます（GitHub Actions）<br>
+  同人価格.com はFANZA・DLsiteのアフィリエイトプログラムに参加しています。
 </div>
 
 <script>
-const items = [
-  { rank:1, emoji:'⚔️', title:'魔王城のリリア ～堕落の迷宮～', circle:'サークル夢幻工房', genre:'rpg', fanza:1320, dlsite:1100, sale:true, saleEnd:'4/20' },
-  { rank:2, emoji:'📖', title:'禁断の調教記録 Complete Edition', circle:'WhiteRaven Studio', genre:'novel', fanza:2200, dlsite:2200, sale:false },
-  { rank:3, emoji:'🎨', title:'CG集 千夜と千代', circle:'花火工房', genre:'cg', fanza:880, dlsite:990, sale:false },
-  { rank:4, emoji:'🎵', title:'ちゅ～もく！耳かき屋さん vol.3', circle:'honeybee sound', genre:'voice', fanza:550, dlsite:495, sale:true, saleEnd:'4/15' },
-  { rank:5, emoji:'📚', title:'ダンジョン司書の秘密調査', circle:'Library Labyrinth', genre:'manga', fanza:770, dlsite:880, sale:false },
-  { rank:6, emoji:'⚔️', title:'聖女騎士エリナ ～魔境討伐～', circle:'Valkyrie Factory', genre:'rpg', fanza:1650, dlsite:1540, sale:false },
-  { rank:7, emoji:'🎨', title:'夢幻学園 CG集 vol.12', circle:'ミラクルキャンバス', genre:'cg', fanza:1100, dlsite:1100, sale:true, saleEnd:'4/30' },
-  { rank:8, emoji:'🎵', title:'ASMR 図書館司書のひそひそ話', circle:'静寂スタジオ', genre:'voice', fanza:440, dlsite:528, sale:false },
-  { rank:9, emoji:'📖', title:'異世界転移と奴隷少女の物語', circle:'BlueRose Works', genre:'novel', fanza:1980, dlsite:1760, sale:false },
-  { rank:10, emoji:'⚔️', title:'勇者失格 ～魔物娘と生きる～', circle:'逃避行ゲームズ', genre:'rpg', fanza:1320, dlsite:1320, sale:false },
-  { rank:11, emoji:'📚', title:'悪役令嬢の逆転劇 1-3巻セット', circle:'スピカコミックス', genre:'manga', fanza:2970, dlsite:2640, sale:true, saleEnd:'5/10' },
-  { rank:12, emoji:'🎨', title:'水彩画家の秘密アトリエ CG集', circle:'Aquarelle Labo', genre:'cg', fanza:660, dlsite:770, sale:false },
-];
-
-const genreLabel = { rpg:'RPG', novel:'ノベル', cg:'CG集', voice:'音声', manga:'マンガ' };
-const genreClass = { rpg:'genre-rpg', novel:'genre-novel', cg:'genre-cg', voice:'genre-voice', manga:'genre-manga' };
-
+let allItems = [];
 let currentTab = 'all';
 
-function setTab(t, btn) {
-  currentTab = t;
+// タブ
+document.getElementById('tabs').onclick = e => {
+  const btn = e.target.closest('.tab');
+  if (!btn) return;
   document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  render();
+  currentTab = btn.dataset.tab;
+  renderList();
+};
+
+// データ読み込み
+async function loadData() {
+  try {
+    const res = await fetch('data.json?' + Date.now());
+    if (!res.ok) throw new Error('data.json が見つかりません');
+    const data = await res.json();
+
+    document.getElementById('updatedAt').textContent = `最終更新: ${data.updatedAt || '不明'}`;
+    allItems = data.items || [];
+
+    renderStats();
+    renderList();
+  } catch(e) {
+    console.error(e);
+    document.getElementById('content').innerHTML = `
+      <div class="empty">
+        <div class="empty-icon">⚠️</div>
+        <p>データの読み込みに失敗しました。<br>GitHub Actionsが初回実行されるまでお待ちください。</p>
+      </div>`;
+    document.getElementById('updatedAt').textContent = 'データ未取得';
+  }
 }
 
-function rankClass(r) {
-  if (r === 1) return 'gold';
-  if (r === 2) return 'silver';
-  if (r === 3) return 'bronze';
-  return '';
+function renderStats() {
+  const withBoth = allItems.filter(i => i.fanzaPrice != null && i.price != null);
+  const fanzaWin = withBoth.filter(i => i.fanzaPrice < i.price).length;
+  const dlsiteWin = withBoth.filter(i => i.price < i.fanzaPrice).length;
+  const same = withBoth.filter(i => i.price === i.fanzaPrice).length;
+  const avgDiff = withBoth.length > 0
+    ? Math.round(withBoth.reduce((s,i) => s + Math.abs((i.fanzaPrice||0) - i.price), 0) / withBoth.length)
+    : 0;
+
+  document.getElementById('stats').innerHTML = `
+    <div class="stat"><div class="stat-label">取得作品数</div><div class="stat-val">${allItems.length}</div></div>
+    <div class="stat"><div class="stat-label">価格比較可能</div><div class="stat-val">${withBoth.length}</div></div>
+    <div class="stat"><div class="stat-label">FANZA安い</div><div class="stat-val red">${fanzaWin}</div></div>
+    <div class="stat"><div class="stat-label">DLsite安い</div><div class="stat-val blue">${dlsiteWin}</div></div>
+    <div class="stat"><div class="stat-label">平均差額</div><div class="stat-val green">¥${avgDiff}</div></div>`;
 }
 
-function render() {
-  const search = document.getElementById('search').value.toLowerCase();
-  const genre = document.getElementById('genre').value;
-  const sort = document.getElementById('sort').value;
-
-  let data = items.filter(i => {
-    if (search && !i.title.toLowerCase().includes(search) && !i.circle.toLowerCase().includes(search)) return false;
-    if (genre && i.genre !== genre) return false;
-    if (currentTab === 'fanza' && i.fanza >= i.dlsite) return false;
-    if (currentTab === 'dlsite' && i.dlsite >= i.fanza) return false;
-    if (currentTab === 'sale' && !i.sale) return false;
+function renderList() {
+  let data = allItems.filter(i => {
+    if (currentTab === 'fanza') return i.fanzaPrice != null && i.fanzaPrice < i.price;
+    if (currentTab === 'dlsite') return i.fanzaPrice != null && i.price < i.fanzaPrice;
+    if (currentTab === 'sale') return i.isOnSale;
     return true;
   });
 
-  data.sort((a, b) => {
-    if (sort === 'rank') return a.rank - b.rank;
-    if (sort === 'diff_desc') return Math.abs(b.fanza - b.dlsite) - Math.abs(a.fanza - a.dlsite);
-    if (sort === 'price_asc') return Math.min(a.fanza, a.dlsite) - Math.min(b.fanza, b.dlsite);
-    if (sort === 'price_desc') return Math.min(b.fanza, b.dlsite) - Math.min(a.fanza, a.dlsite);
-    return 0;
-  });
-
-  const list = document.getElementById('list');
   if (!data.length) {
-    list.innerHTML = '<div class="empty">該当作品が見つかりませんでした。</div>';
+    document.getElementById('content').innerHTML = `
+      <div class="empty">
+        <div class="empty-icon">📦</div>
+        <p>該当する作品が見つかりませんでした</p>
+      </div>`;
     return;
   }
 
-  list.innerHTML = data.map(i => {
-    const cheaper = i.fanza < i.dlsite ? 'fanza' : i.dlsite < i.fanza ? 'dlsite' : 'same';
-    const diff = Math.abs(i.fanza - i.dlsite);
-    const diffLabel = diff > 0 ? `¥${diff.toLocaleString()} お得` : '同一価格';
-    const diffClass = diff > 0 ? 'has-diff' : 'no-diff';
-    const winnerLabel = cheaper === 'fanza'
-      ? `<strong class="fanza">FANZA</strong>が安い`
-      : cheaper === 'dlsite'
-      ? `<strong class="dlsite">DLsite</strong>が安い`
-      : '同一価格';
+  document.getElementById('content').innerHTML = `<div class="card-list">${data.map(i => {
+    const dlPrice = i.price || 0;
+    const fzPrice = i.fanzaPrice;
+    const hasBoth = fzPrice != null && fzPrice > 0;
+
+    let cheaper = 'none';
+    let diff = 0;
+    if (hasBoth) {
+      if (fzPrice < dlPrice) { cheaper = 'fanza'; diff = dlPrice - fzPrice; }
+      else if (dlPrice < fzPrice) { cheaper = 'dlsite'; diff = fzPrice - dlPrice; }
+      else { cheaper = 'same'; }
+    }
+
+    // 購入リンク
+    let buyHtml = '';
+    if (cheaper === 'fanza') {
+      buyHtml = `
+        <a href="${i.fanzaUrl}" target="_blank" rel="noopener noreferrer" class="buy-link fanza">→ FANZAから購入</a>
+        <span class="save-badge">¥${diff.toLocaleString()} お得！</span>`;
+    } else if (cheaper === 'dlsite') {
+      buyHtml = `
+        <a href="${i.dlsiteUrl}" target="_blank" rel="noopener noreferrer" class="buy-link dlsite">→ DLsiteから購入</a>
+        <span class="save-badge">¥${diff.toLocaleString()} お得！</span>`;
+    } else if (cheaper === 'same') {
+      buyHtml = `
+        <a href="${i.dlsiteUrl}" target="_blank" rel="noopener noreferrer" class="buy-link dlsite">→ DLsiteで見る</a>
+        ${i.fanzaUrl ? `<a href="${i.fanzaUrl}" target="_blank" rel="noopener noreferrer" class="buy-link fanza">→ FANZAで見る</a>` : ''}
+        <span class="same-badge">同一価格</span>`;
+    } else {
+      // FANZA価格なし → DLsiteのみ
+      buyHtml = `
+        <a href="${i.dlsiteUrl}" target="_blank" rel="noopener noreferrer" class="buy-link dlsite">→ DLsiteで見る</a>`;
+    }
 
     return `
-    <div class="item-card">
-      <div class="rank ${rankClass(i.rank)}">${i.rank}</div>
-      <div class="thumb">${i.emoji}</div>
-      <div class="info">
-        <div class="item-title">${i.title}${i.sale ? ` <span class="sale-badge">SALE〜${i.saleEnd}</span>` : ''}</div>
-        <div class="item-meta">
-          <span class="circle-name">${i.circle}</span>
-          <span class="genre-badge ${genreClass[i.genre]}">${genreLabel[i.genre]}</span>
-        </div>
-        <div class="prices">
-          <div class="price-block">
-            <span class="price-site">FANZA</span>
-            <span class="price-num fanza ${cheaper === 'fanza' ? 'winner' : ''}">¥${i.fanza.toLocaleString()}</span>
+    <div class="card">
+      <div class="card-top">
+        <div class="rank ${i.rank<=3?'r'+i.rank:''}">${i.rank}</div>
+        <div class="thumb">${i.emoji || '📄'}</div>
+        <div class="card-info">
+          <div class="card-title">
+            ${i.title}
+            ${i.isOnSale ? '<span class="sale-tag">SALE</span>' : ''}
+            ${i.rating ? `<span class="rating">★${i.rating}</span>` : ''}
           </div>
-          <span class="vs">VS</span>
-          <div class="price-block">
-            <span class="price-site">DLsite</span>
-            <span class="price-num dlsite ${cheaper === 'dlsite' ? 'winner' : ''}">¥${i.dlsite.toLocaleString()}</span>
-          </div>
-          <div class="diff-area">
-            <span class="diff-save ${diffClass}">${diffLabel}</span>
-            <span class="diff-winner">${winnerLabel}</span>
+          <div class="card-meta">
+            <span class="circle">${i.circle}</span>
+            <span class="genre">${i.genre}</span>
+            ${(i.tags || []).slice(0, 2).map(t => `<span class="genre">${t}</span>`).join('')}
           </div>
         </div>
       </div>
+      <div class="price-compare">
+        <div class="price-side fanza ${cheaper==='fanza'?'winner':''} ${!hasBoth?'no-data':''}">
+          <span class="price-site fanza">FANZA</span>
+          ${hasBoth
+            ? `<span class="price-num fanza">¥${fzPrice.toLocaleString()}</span>`
+            : `<span class="price-num na">API連携待ち</span>`}
+        </div>
+        <div class="vs-divider">VS</div>
+        <div class="price-side dlsite ${cheaper==='dlsite'?'winner':''}">
+          <span class="price-site dlsite">DLsite</span>
+          <span class="price-num dlsite">¥${dlPrice.toLocaleString()}</span>
+          ${i.originalPrice ? `<span class="price-orig">¥${i.originalPrice.toLocaleString()}</span>` : ''}
+        </div>
+      </div>
+      <div class="buy-area">${buyHtml}</div>
     </div>`;
-  }).join('');
+  }).join('')}</div>`;
 }
 
-render();
+loadData();
 </script>
 </body>
 </html>
