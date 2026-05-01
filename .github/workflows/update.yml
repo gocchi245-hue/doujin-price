@@ -2,10 +2,8 @@ name: Update Data
 
 on:
   schedule:
-    # 毎日日本時間12:00に実行（UTC 3:00）
     - cron: '0 3 * * *'
   workflow_dispatch:
-    # 手動実行も可能
 
 permissions:
   contents: write
@@ -24,7 +22,10 @@ jobs:
           python-version: '3.12'
 
       - name: Install dependencies
-        run: pip install requests beautifulsoup4
+        run: |
+          pip install playwright requests
+          playwright install chromium
+          playwright install-deps chromium
 
       - name: Run scraper
         env:
