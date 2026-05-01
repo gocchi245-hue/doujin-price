@@ -1,135 +1,130 @@
-import requests
-from bs4 import BeautifulSoup
 import json
 import os
+import re
 from datetime import datetime
-
-HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-    'Accept-Language': 'ja,en;q=0.9',
-}
+from playwright.sync_api import sync_playwright
 
 def scrape_dlsite_ranking():
-    """DLsiteの同人ランキングページをスクレイピング"""
-    url = 'https://www.dlsite.com/maniax/ranking/day'
-    print(f"[DLsite] ランキング取得中: {url}")
-
-    try:
-        res = requests.get(url, headers=HEADERS, timeout=30)
-        res.raise_for_status()
-    except Exception as e:
-        print(f"[DLsite] 取得失敗: {e}")
-        return []
-
-    soup = BeautifulSoup(res.text, 'html.parser')
+    """PlaywrightでDLsiteの同人ランキングを取得"""
+    print("[DLsite] ランキング取得開始")
     items = []
-    rank = 0
 
-    # ランキングの各作品を取得
-    for work in soup.select('.n_worklist_item, .rank_list .n_worklist_item, table.n_worklist tr, .ranking_table tr, .work_1col_table tr'):
-        rank += 1
-        if rank > 30:
-            break
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page(
+            user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+        )
 
         try:
-            # タイトル
-            title_el = work.select_one('a.work_name, dt.work_name a, .work_name a')
-            if not title_el:
-                rank -= 1
-                continue
-            title = title_el.get_text(strip=True)
-            href = title_el.get('href', '')
+            page.goto('https://www.dlsite.com/maniax/ranking/day', timeout=60000)
+            page.wait_for_timeout(5000)
 
-            # product_id を抽出
-            product_id = ''
-            if '/product_id/' in href:
-                product_id = href.split('/product_id/')[1].split('.')[0].split('/')[0]
+            # product_idを含むリンクを全て取得
+            links = page.query_selector_all('a[href*="/product_id/RJ"]')
+            print(f"[DLsite] product_idリンク数: {len(links)}")
 
-            # サークル名
-            circle_el = work.select_one('.maker_name a, .circle_name a, dd.maker_name a')
-            circle = circle_el.get_text(strip=True) if circle_el else '不明'
+            seen_ids = set()
+            rank = 0
+            for link in links:
+                href = link.get_attribute('href') or ''
+                match = re.search(r'product_id/(RJ\d+)', href)
+                if not match:
+                    continue
+                pid = match.group(1)
+                if pid in seen_ids:
+                    continue
+                seen_ids.add(pid)
+                rank += 1
+                if rank > 30:
+                    break
 
-            # 価格
-            price_el = work.select_one('.work_price, .strike, .price')
-            price_text = price_el.get_text(strip=True) if price_el else '0'
-            price = int(''.join(c for c in price_text if c.isdigit()) or '0')
+                title = link.get_attribute('title') or link.inner_text().strip()
+                if not title or len(title) < 2:
+                    title = pid
 
-            # 元価格（セール時）
-            orig_el = work.select_one('.work_price .strike, .normal_price')
-            orig_price = None
-            if orig_el:
-                orig_text = orig_el.get_text(strip=True)
-                orig_price = int(''.join(c for c in orig_text if c.isdigit()) or '0')
-                if orig_price == price:
-                    orig_price = None
+                dlsite_url = f"https://www.dlsite.com/maniax/work/=/product_id/{pid}.html"
+                items.append({
+                    'rank': rank,
+                    'title': title,
+                    'circle': '',
+                    'genre': 'その他',
+                    'price': 0,
+                    'originalPrice': None,
+                    'tags': [],
+                    'dlsiteUrl': dlsite_url,
+                    'productId': pid,
+                    'rating': None,
+                    'emoji': '📄',
+                    'isOnSale': False,
+                    'fanzaPrice': None,
+                    'fanzaUrl': '',
+                })
 
-            # ジャンルタグ
-            tags = []
-            for tag_el in work.select('.search_tag a, .work_genre a, .genre a'):
-                tags.append(tag_el.get_text(strip=True))
+            print(f"[DLsite] ユニーク作品数: {len(items)}")
 
-            # 評価
-            star_el = work.select_one('.star_rating, .point .average, .review_point')
-            rating = None
-            if star_el:
-                star_text = star_el.get_text(strip=True)
+            # 各作品の詳細ページから情報を取得
+            for item in items[:20]:
                 try:
-                    rating = float(''.join(c for c in star_text if c.isdigit() or c == '.') or '0')
-                    if rating > 5:
-                        rating = rating / 10 if rating <= 50 else None
-                except:
-                    pass
+                    page.goto(item['dlsiteUrl'], timeout=30000)
+                    page.wait_for_timeout(2000)
 
-            # URL構築
-            if product_id:
-                dlsite_url = f"https://www.dlsite.com/maniax/work/=/product_id/{product_id}.html"
-            elif href.startswith('http'):
-                dlsite_url = href
-            else:
-                dlsite_url = f"https://www.dlsite.com{href}" if href else ''
+                    # タイトル再取得
+                    title_el = page.query_selector('#work_name, [id*="work_name"]')
+                    if title_el:
+                        item['title'] = title_el.inner_text().strip()
 
-            # ジャンル推定
-            genre = 'その他'
-            genre_map = {
-                'RPG': ['RPG', 'ロールプレイング'],
-                '音声': ['音声', 'ASMR', 'ボイス', 'バイノーラル'],
-                'CG集': ['CG', 'イラスト', 'CG集'],
-                'ノベル': ['ノベル', 'ADV', 'アドベンチャー'],
-                'マンガ': ['マンガ', '漫画', 'コミック'],
-                'アクション': ['アクション', 'ACT'],
-                'シミュレーション': ['シミュレーション', 'SLG'],
-            }
-            title_lower = title.lower()
-            for g, keywords in genre_map.items():
-                for kw in keywords:
-                    if kw.lower() in title_lower or kw in tags:
-                        genre = g
-                        break
+                    # サークル名
+                    circle_el = page.query_selector('[class*="maker_name"] a')
+                    if circle_el:
+                        item['circle'] = circle_el.inner_text().strip()
 
-            # 絵文字
-            emoji_map = {'RPG':'⚔️','音声':'🎵','CG集':'🎨','ノベル':'📖','マンガ':'📚','アクション':'🎮','シミュレーション':'🏰','その他':'📄'}
-            emoji = emoji_map.get(genre, '📄')
+                    # 価格
+                    price_el = page.query_selector('[class*="work_buy"] [class*="price"], [class*="work_price"]')
+                    if price_el:
+                        price_text = price_el.inner_text().strip()
+                        nums = re.findall(r'[\d]+', price_text.replace(',', ''))
+                        if nums:
+                            item['price'] = int(nums[0])
 
-            items.append({
-                'rank': rank,
-                'title': title,
-                'circle': circle,
-                'genre': genre,
-                'price': price,
-                'originalPrice': orig_price,
-                'tags': tags[:3],
-                'dlsiteUrl': dlsite_url,
-                'productId': product_id,
-                'rating': rating,
-                'emoji': emoji,
-                'isOnSale': orig_price is not None and orig_price > price,
-            })
+                    # ジャンルタグ
+                    tag_els = page.query_selector_all('[class*="work_genre"] a, [class*="genre"] a')
+                    item['tags'] = [t.inner_text().strip() for t in tag_els[:5] if t.inner_text().strip()]
+
+                    # ジャンル推定
+                    all_text = item['title'] + ' ' + ' '.join(item['tags'])
+                    for g, kws in {
+                        'RPG': ['RPG', 'ロールプレイング'],
+                        '音声': ['音声', 'ASMR', 'ボイス', 'バイノーラル'],
+                        'CG集': ['CG', 'イラスト集'],
+                        'ノベル': ['ノベル', 'ADV', 'アドベンチャー'],
+                        'マンガ': ['マンガ', '漫画', 'コミック'],
+                        'アクション': ['アクション', 'ACT'],
+                        'シミュレーション': ['シミュレーション', 'SLG'],
+                        '動画': ['動画', 'アニメーション'],
+                    }.items():
+                        if any(kw in all_text for kw in kws):
+                            item['genre'] = g
+                            break
+
+                    emoji_map = {'RPG':'⚔️','音声':'🎵','CG集':'🎨','ノベル':'📖','マンガ':'📚','アクション':'🎮','シミュレーション':'🏰','動画':'🎬','その他':'📄'}
+                    item['emoji'] = emoji_map.get(item['genre'], '📄')
+
+                    print(f"  [{item['rank']}] {item['title'][:30]} / {item['circle']} / ¥{item['price']}")
+
+                except Exception as e:
+                    print(f"  [{item['rank']}] 詳細取得失敗: {e}")
+
         except Exception as e:
-            print(f"[DLsite] 作品パース失敗 (rank {rank}): {e}")
-            rank -= 1
-            continue
+            print(f"[DLsite] メインエラー: {e}")
+            try:
+                print(f"[DEBUG] ページタイトル: {page.title()}")
+            except:
+                pass
 
-    print(f"[DLsite] {len(items)}件取得完了")
+        finally:
+            browser.close()
+
+    print(f"[DLsite] 合計{len(items)}件取得完了")
     return items
 
 
@@ -139,6 +134,7 @@ def scrape_fanza_api(api_id, affiliate_id):
         print("[FANZA] APIキー未設定 - スキップ")
         return {}
 
+    import requests
     url = 'https://api.dmm.com/affiliate/v3/ItemList'
     params = {
         'api_id': api_id,
@@ -151,9 +147,8 @@ def scrape_fanza_api(api_id, affiliate_id):
         'output': 'json',
     }
 
-    print(f"[FANZA] API取得中")
     try:
-        res = requests.get(url, params=params, headers=HEADERS, timeout=30)
+        res = requests.get(url, params=params, timeout=30)
         res.raise_for_status()
         data = res.json()
     except Exception as e:
@@ -166,62 +161,37 @@ def scrape_fanza_api(api_id, affiliate_id):
         price_info = item.get('prices', {})
         price = price_info.get('price', '0')
         price = int(''.join(c for c in str(price) if c.isdigit()) or '0')
-
         fanza_url = item.get('URL', '')
-        fanza_items[title] = {
-            'price': price,
-            'url': fanza_url,
-        }
+        fanza_items[title] = {'price': price, 'url': fanza_url}
 
     print(f"[FANZA] {len(fanza_items)}件取得完了")
     return fanza_items
 
 
-def merge_data(dlsite_items, fanza_items):
-    """DLsiteとFANZAのデータをマージ"""
-    merged = []
-    for item in dlsite_items:
-        # FANZAから同名作品を検索（簡易マッチ）
-        fanza_price = None
-        fanza_url = ''
-        for ftitle, fdata in fanza_items.items():
-            # タイトルの部分一致で検索
-            if item['title'] in ftitle or ftitle in item['title']:
-                fanza_price = fdata['price']
-                fanza_url = fdata['url']
-                break
-
-        item['fanzaPrice'] = fanza_price
-        item['fanzaUrl'] = fanza_url
-        merged.append(item)
-
-    return merged
-
-
 def main():
-    # DLsiteランキング取得
     dlsite_items = scrape_dlsite_ranking()
 
-    # FANZA API取得（環境変数からキーを読む）
     fanza_api_id = os.environ.get('FANZA_API_ID', '')
     fanza_affiliate_id = os.environ.get('FANZA_AFFILIATE_ID', '')
     fanza_items = scrape_fanza_api(fanza_api_id, fanza_affiliate_id)
 
-    # データマージ
-    merged = merge_data(dlsite_items, fanza_items)
+    for item in dlsite_items:
+        for ftitle, fdata in fanza_items.items():
+            if item['title'] in ftitle or ftitle in item['title']:
+                item['fanzaPrice'] = fdata['price']
+                item['fanzaUrl'] = fdata['url']
+                break
 
-    # JSON保存
     output = {
         'updatedAt': datetime.now().strftime('%Y/%m/%d %H:%M'),
         'source': 'DLsite ranking + FANZA API',
-        'items': merged,
+        'items': dlsite_items,
     }
 
     with open('data.json', 'w', encoding='utf-8') as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
 
-    print(f"\ndata.json に{len(merged)}件保存しました")
-    print(f"更新日時: {output['updatedAt']}")
+    print(f"\ndata.json に{len(dlsite_items)}件保存しました")
 
 
 if __name__ == '__main__':
