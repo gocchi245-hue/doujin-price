@@ -69,7 +69,6 @@ def scrape_dlsite_ranking(page):
                 if circle_el:
                     item['circle'] = circle_el.inner_text().strip()
 
-                # 価格取得を改善: 複数のセレクターを試す
                 price = 0
                 for selector in [
                     '.work_buy_content .price',
@@ -80,12 +79,10 @@ def scrape_dlsite_ranking(page):
                     price_el = page.query_selector(selector)
                     if price_el:
                         price_text = price_el.inner_text().strip()
-                        # 「円」の前の数値を取得
                         price_match = re.search(r'([\d,]+)\s*円', price_text)
                         if price_match:
                             price = int(price_match.group(1).replace(',', ''))
                             break
-                        # カンマ区切りの数値を取得（100以上のもの）
                         nums = re.findall(r'[\d,]+', price_text)
                         for n in nums:
                             val = int(n.replace(',', ''))
@@ -130,196 +127,60 @@ def scrape_dlsite_ranking(page):
     return items
 
 
-def scrape_fanza_ranking(browser):
-    """FANZAの同人ランキングをCookie設定でスクレイピング"""
-    print("[FANZA] ランキング取得開始")
+def load_fanza_manual():
+    """fanza_manual.txt から手動入力されたFANZAデータを読み込む
+
+    フォーマット（1行に1作品）:
+      価格 タイトル URL
+    例:
+      1320 魔王城のリリア https://www.dmm.co.jp/dc/doujin/...
+      880 催眠音声 vol.3 https://www.dmm.co.jp/dc/doujin/...
+
+    # で始まる行はコメント、空行はスキップ
+    """
+    filepath = 'fanza_manual.txt'
     fanza_data = {}
 
-    # 年齢認証済みCookieを設定した新しいコンテキスト
-    context = browser.new_context(
-        user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-    )
+    if not os.path.exists(filepath):
+        print(f"[FANZA手動] {filepath} が見つかりません - スキップ")
+        return fanza_data
 
-    # 年齢認証Cookieを事前に設定
-    context.add_cookies([
-        {'name': 'age_check_done', 'value': '1', 'domain': '.dmm.co.jp', 'path': '/'},
-        {'name': 'age_check_done', 'value': '1', 'domain': '.dmm.com', 'path': '/'},
-        {'name': 'is_intarnal', 'value': '1', 'domain': '.dmm.co.jp', 'path': '/'},
-        {'name': 'ckcy', 'value': '1', 'domain': '.dmm.co.jp', 'path': '/'},
-        {'name': 'cklg', 'value': 'ja', 'domain': '.dmm.co.jp', 'path': '/'},
-    ])
+    print(f"[FANZA手動] {filepath} を読み込み中")
 
-    page = context.new_page()
+    with open(filepath, 'r', encoding='utf-8') as f:
+        for line_num, line in enumerate(f, 1):
+            line = line.strip()
 
-    try:
-        # まずトップページで年齢認証を通す
-        page.goto('https://www.dmm.co.jp/top/', timeout=30000)
-        page.wait_for_timeout(2000)
-
-        # 年齢認証ボタンが表示されたらクリック
-        for selector in [
-            'a:has-text("はい")',
-            'a:has-text("Yes")',
-            '.ageCheck__link--yes',
-            'a[href*="age_check"][href*="yes"]',
-            'button:has-text("はい")',
-        ]:
-            btn = page.query_selector(selector)
-            if btn:
-                print(f"[FANZA] 年齢認証ボタンをクリック: {selector}")
-                btn.click()
-                page.wait_for_timeout(3000)
-                break
-
-        print(f"[FANZA] トップページ通過: {page.title()}")
-
-        # 同人ランキングページにアクセス
-        ranking_urls = [
-            'https://www.dmm.co.jp/dc/doujin/-/ranking/=/term=daily/',
-            'https://www.dmm.co.jp/dc/doujin/-/ranking/',
-            'https://www.dmm.co.jp/dc/doujin/',
-        ]
-
-        for url in ranking_urls:
-            print(f"[FANZA] アクセス試行: {url}")
-            page.goto(url, timeout=30000)
-            page.wait_for_timeout(3000)
-
-            # 年齢認証が再度表示されたらクリック
-            for sel in ['a:has-text("はい")', '.ageCheck__link--yes']:
-                btn = page.query_selector(sel)
-                if btn:
-                    btn.click()
-                    page.wait_for_timeout(3000)
-                    break
-
-            current_title = page.title()
-            current_url = page.url
-            print(f"[FANZA] ページタイトル: {current_title}")
-            print(f"[FANZA] URL: {current_url}")
-
-            # ログインページでなければ成功
-            if 'ログイン' not in current_title and 'login' not in current_url.lower():
-                break
-
-        # 作品リンクを取得（様々なパターンで試行）
-        work_links = []
-        for selector in [
-            'a[href*="/dc/doujin/-/detail/"]',
-            'a[href*="doujin"][href*="cid="]',
-            '.rank-list a[href*="doujin"]',
-            '.rankingList a[href*="doujin"]',
-            'a[href*="/digital/doujin/"]',
-            'p.tmb a[href*="doujin"]',
-            'li a[href*="doujin"]',
-        ]:
-            work_links = page.query_selector_all(selector)
-            if work_links:
-                print(f"[FANZA] セレクター '{selector}' で {len(work_links)}件発見")
-                break
-
-        if not work_links:
-            # フォールバック: ページ内の全リンクからdoujin関連を抽出
-            all_links = page.query_selector_all('a[href]')
-            print(f"[FANZA] 全リンク数: {len(all_links)}")
-            for link in all_links:
-                href = link.get_attribute('href') or ''
-                if 'doujin' in href and ('detail' in href or 'cid=' in href):
-                    work_links.append(link)
-
-        print(f"[FANZA] 作品リンク数: {len(work_links)}")
-
-        seen = set()
-        for link in work_links:
-            href = link.get_attribute('href') or ''
-            title = link.get_attribute('title') or ''
-
-            if not title:
-                img = link.query_selector('img')
-                if img:
-                    title = img.get_attribute('alt') or ''
-
-            if not title:
-                title = link.inner_text().strip()
-
-            if not title or len(title) < 3 or title in seen:
+            # 空行・コメント行をスキップ
+            if not line or line.startswith('#'):
                 continue
 
-            seen.add(title)
+            # URLを抽出（行内のhttps://で始まる部分）
+            url_match = re.search(r'(https?://\S+)', line)
+            url = url_match.group(1) if url_match else ''
 
-            if href.startswith('//'):
-                href = 'https:' + href
-            elif href.startswith('/'):
-                href = 'https://www.dmm.co.jp' + href
+            # URLを除いた部分から価格とタイトルを取得
+            remaining = line
+            if url:
+                remaining = line.replace(url, '').strip()
 
-            fanza_data[title] = {'url': href, 'price': None}
-
-        print(f"[FANZA] ユニーク作品数: {len(fanza_data)}")
-
-        # 上位作品の詳細ページから価格取得
-        count = 0
-        for title, data in list(fanza_data.items()):
-            if count >= 15:
-                break
-            if not data['url']:
+            # 先頭の数値を価格として取得
+            price_match = re.match(r'^(\d+)\s+(.+)', remaining)
+            if price_match:
+                price = int(price_match.group(1))
+                title = price_match.group(2).strip()
+            else:
+                print(f"  [警告] 行{line_num}: パース失敗 → {line[:50]}")
                 continue
-            try:
-                page.goto(data['url'], timeout=30000)
-                page.wait_for_timeout(2000)
 
-                # 年齢認証
-                for sel in ['a:has-text("はい")', '.ageCheck__link--yes']:
-                    btn = page.query_selector(sel)
-                    if btn:
-                        btn.click()
-                        page.wait_for_timeout(2000)
-                        break
+            if title and price > 0:
+                fanza_data[title] = {
+                    'price': price,
+                    'url': url,
+                }
+                print(f"  [FANZA] {title[:25]}... ¥{price}")
 
-                # 価格取得
-                for selector in [
-                    '.price',
-                    '[class*="price"]',
-                    '[class*="Price"]',
-                    'span:has-text("円")',
-                ]:
-                    price_el = page.query_selector(selector)
-                    if price_el:
-                        price_text = price_el.inner_text().strip()
-                        price_match = re.search(r'([\d,]+)\s*円', price_text)
-                        if price_match:
-                            data['price'] = int(price_match.group(1).replace(',', ''))
-                            break
-                        nums = re.findall(r'[\d,]+', price_text)
-                        for n in nums:
-                            val = int(n.replace(',', ''))
-                            if val >= 100:
-                                data['price'] = val
-                                break
-                    if data['price']:
-                        break
-
-                count += 1
-                print(f"  [FANZA] {title[:25]}... ¥{data['price']}")
-
-            except Exception as e:
-                print(f"  [FANZA] 詳細取得失敗: {title[:20]} - {e}")
-                count += 1
-
-    except Exception as e:
-        print(f"[FANZA] エラー: {e}")
-        try:
-            print(f"[FANZA DEBUG] タイトル: {page.title()}")
-            print(f"[FANZA DEBUG] URL: {page.url}")
-            # ページ内の一部HTMLをデバッグ出力
-            body_text = page.inner_text('body')
-            print(f"[FANZA DEBUG] ページテキスト先頭300文字: {body_text[:300]}")
-        except:
-            pass
-
-    finally:
-        context.close()
-
-    print(f"[FANZA] 合計{len(fanza_data)}件取得完了")
+    print(f"[FANZA手動] {len(fanza_data)}件読み込み完了")
     return fanza_data
 
 
@@ -363,9 +224,9 @@ def match_titles(t1, t2):
         return True
     shorter = n1 if len(n1) <= len(n2) else n2
     longer = n2 if len(n1) <= len(n2) else n1
-    if len(shorter) >= 5 and shorter in longer:
+    if len(shorter) >= 4 and shorter in longer:
         return True
-    if len(n1) >= 8 and len(n2) >= 8 and n1[:8] == n2[:8]:
+    if len(n1) >= 6 and len(n2) >= 6 and n1[:6] == n2[:6]:
         return True
     return False
 
@@ -373,24 +234,25 @@ def match_titles(t1, t2):
 def main():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
-
-        # DLsite
         page = browser.new_page(
             user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
         )
+
+        # DLsiteランキング取得
         dlsite_items = scrape_dlsite_ranking(page)
         page.close()
-
-        # FANZA: APIキーがあればAPI、なければスクレイピング
-        fanza_api_id = os.environ.get('FANZA_API_ID', '')
-        fanza_affiliate_id = os.environ.get('FANZA_AFFILIATE_ID', '')
-
-        if fanza_api_id and fanza_affiliate_id:
-            fanza_data = scrape_fanza_api(fanza_api_id, fanza_affiliate_id)
-        else:
-            fanza_data = scrape_fanza_ranking(browser)
-
         browser.close()
+
+    # FANZA: APIキーがあればAPI、なければ手動ファイル
+    fanza_api_id = os.environ.get('FANZA_API_ID', '')
+    fanza_affiliate_id = os.environ.get('FANZA_AFFILIATE_ID', '')
+
+    if fanza_api_id and fanza_affiliate_id:
+        fanza_data = scrape_fanza_api(fanza_api_id, fanza_affiliate_id)
+        fanza_method = 'api'
+    else:
+        fanza_data = load_fanza_manual()
+        fanza_method = 'manual'
 
     # マッチング
     matched = 0
@@ -400,14 +262,15 @@ def main():
                 item['fanzaPrice'] = fdata.get('price')
                 item['fanzaUrl'] = fdata.get('url', '')
                 matched += 1
+                print(f"  [一致] {item['title'][:20]} ←→ {ftitle[:20]} (DL:¥{item['price']} / FZ:¥{fdata.get('price')})")
                 break
 
-    print(f"[マッチング] {matched}/{len(dlsite_items)}件がFANZAと一致")
+    print(f"\n[マッチング] {matched}/{len(dlsite_items)}件がFANZAと一致")
 
     output = {
         'updatedAt': datetime.now().strftime('%Y/%m/%d %H:%M'),
-        'source': 'DLsite + FANZA ' + ('API' if fanza_api_id else 'scraping'),
-        'fanzaMethod': 'api' if fanza_api_id else 'scraping',
+        'source': f'DLsite ranking + FANZA {fanza_method}',
+        'fanzaMethod': fanza_method,
         'items': dlsite_items,
     }
 
