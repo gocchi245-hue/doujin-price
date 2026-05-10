@@ -19,8 +19,8 @@
 
 # ↓ ここから実データを入力してください ↓
 # FANZAの同人ランキングを見ながら、価格・タイトル・URLを書いてください
-#   1,685 駆錬輝晶 クォルタ アルミネス ＆ タンジェル EG https://www.dmm.co.jp/dc/doujin/-/detail/=/cid=d_747068/?dmmref=ListRanking&i3_ref=search&i3_ord=1
-#   1,672 聖女リナリアの落葉〜寝取淫紋解呪譚〜 https://www.dmm.co.jp/dc/doujin/-/detail/=/cid=d_626221/?dmmref=RankingAllPer_hourSales&i3_ref=recommend&i3_ord=4
-#   1,444 淫催都市ヒュプノズム https://www.dmm.co.jp/dc/doujin/-/detail/=/cid=d_757417/?dmmref=ListRanking&i3_ref=search&i3_ord=1
-#   1,100 おなクラ メイドライフ〜クラスのギャルメイドとリゾートご奉仕性活〜 https://www.dmm.co.jp/dc/doujin/-/detail/=/cid=d_723108/?dmmref=ListRanking&i3_ref=search&i3_ord=1
-#   2,376 死神商館RExEX 〜 ボイス＆新規シナリオDLC＋サウンドトラック https://www.dmm.co.jp/dc/doujin/-/detail/=/cid=d_706508/?dmmref=ListRanking&i3_ref=search&i3_ord=1
+   1685 駆錬輝晶 クォルタ アルミネス ＆ タンジェル EG https://www.dmm.co.jp/dc/doujin/-/detail/=/cid=d_747068/?dmmref=ListRanking&i3_ref=search&i3_ord=1
+   1672 聖女リナリアの落葉〜寝取淫紋解呪譚〜 https://www.dmm.co.jp/dc/doujin/-/detail/=/cid=d_626221/?dmmref=RankingAllPer_hourSales&i3_ref=recommend&i3_ord=4
+   1444 淫催都市ヒュプノズム https://www.dmm.co.jp/dc/doujin/-/detail/=/cid=d_757417/?dmmref=ListRanking&i3_ref=search&i3_ord=1
+   1100 おなクラ メイドライフ〜クラスのギャルメイドとリゾートご奉仕性活〜 https://www.dmm.co.jp/dc/doujin/-/detail/=/cid=d_723108/?dmmref=ListRanking&i3_ref=search&i3_ord=1
+   2376 死神商館RExEX 〜 ボイス＆新規シナリオDLC＋サウンドトラック https://www.dmm.co.jp/dc/doujin/-/detail/=/cid=d_706508/?dmmref=ListRanking&i3_ref=search&i3_ord=1
