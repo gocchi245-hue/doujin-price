@@ -112,61 +112,104 @@ def scrape_dlsite_ranking(page):
     return items
 
 
+def parse_fanza_line(line, line_num):
+    """1行をパースして作品データを返す"""
+    url_match = re.search(r'(https?://\S+)', line)
+    url = url_match.group(1) if url_match else ''
+
+    remaining = line.replace(url, '').strip() if url else line
+
+    price_match = re.match(r'^(\d+)\s+(.+)', remaining)
+    if price_match:
+        price = int(price_match.group(1))
+        title = price_match.group(2).strip()
+        if title and price > 0:
+            return {'title': title, 'price': price, 'url': url}
+
+    print(f"  [警告] 行{line_num}: パース失敗 → {line[:50]}")
+    return None
+
+
 def load_fanza_manual():
-    """fanza_manual.txt からFANZAデータを読み込む"""
+    """fanza_manual.txt からFANZAデータを読み込む
+
+    セクション:
+      ## ランキング → FANZAタブに表示される
+      ## 比較用     → DLsiteタブの価格比較にのみ使われる
+
+    セクション指定がない場合はすべてランキング扱い
+    """
     filepath = 'fanza_manual.txt'
-    items = []
+    ranking_items = []
+    compare_items = []
 
     if not os.path.exists(filepath):
         print(f"[FANZA] {filepath} が見つかりません")
-        return items
+        return ranking_items, compare_items
 
     print(f"[FANZA] {filepath} を読み込み中")
 
+    current_section = 'ranking'  # デフォルトはランキング
+    rank = 0
+
     with open(filepath, 'r', encoding='utf-8') as f:
-        rank = 0
         for line_num, line in enumerate(f, 1):
             line = line.strip()
-            if not line or line.startswith('#'):
+
+            # 空行スキップ
+            if not line:
                 continue
 
-            url_match = re.search(r'(https?://\S+)', line)
-            url = url_match.group(1) if url_match else ''
-
-            remaining = line.replace(url, '').strip() if url else line
-
-            price_match = re.match(r'^(\d+)\s+(.+)', remaining)
-            if price_match:
-                price = int(price_match.group(1))
-                title = price_match.group(2).strip()
-            else:
-                print(f"  [警告] 行{line_num}: パース失敗 → {line[:50]}")
+            # セクション切り替え
+            if line.startswith('## '):
+                section_name = line[3:].strip().lower()
+                if 'ランキング' in line or 'ranking' in section_name:
+                    current_section = 'ranking'
+                    print(f"  [セクション] ランキング")
+                elif '比較' in line or 'compare' in section_name:
+                    current_section = 'compare'
+                    print(f"  [セクション] 比較用")
                 continue
 
-            if title and price > 0:
+            # コメント行スキップ
+            if line.startswith('#'):
+                continue
+
+            # データ行をパース
+            data = parse_fanza_line(line, line_num)
+            if not data:
+                continue
+
+            item = {
+                'title': data['title'],
+                'price': data['price'],
+                'url': data['url'],
+                'circle': '',
+                'genre': '',
+                'tags': [],
+                'emoji': '📄',
+                'rivalPrice': None,
+                'rivalUrl': '',
+            }
+
+            if current_section == 'ranking':
                 rank += 1
-                items.append({
-                    'rank': rank,
-                    'title': title,
-                    'price': price,
-                    'url': url,
-                    'circle': '',
-                    'genre': '',
-                    'tags': [],
-                    'emoji': '📄',
-                    'rivalPrice': None,
-                    'rivalUrl': '',
-                })
-                print(f"  [{rank}] {title[:30]} / ¥{price}")
+                item['rank'] = rank
+                ranking_items.append(item)
+                print(f"  [ランキング {rank}] {data['title'][:25]}... ¥{data['price']}")
+            else:
+                item['rank'] = 0
+                compare_items.append(item)
+                print(f"  [比較用] {data['title'][:25]}... ¥{data['price']}")
 
-    print(f"[FANZA] {len(items)}件読み込み完了")
-    return items
+    print(f"[FANZA] ランキング: {len(ranking_items)}件 / 比較用: {len(compare_items)}件")
+    return ranking_items, compare_items
 
 
 def load_fanza_api(api_id, affiliate_id):
     """FANZA APIから取得"""
     if not api_id or not affiliate_id:
-        return []
+        return [], []
 
     import requests
     print("[FANZA API] 取得開始")
@@ -180,7 +223,7 @@ def load_fanza_api(api_id, affiliate_id):
         data = res.json()
     except Exception as e:
         print(f"[FANZA API] 失敗: {e}")
-        return []
+        return [], []
 
     items = []
     for i, item in enumerate(data.get('result', {}).get('items', []), 1):
@@ -194,13 +237,13 @@ def load_fanza_api(api_id, affiliate_id):
         })
 
     print(f"[FANZA API] {len(items)}件取得完了")
-    return items
+    return items, []
 
 
 def match_titles(t1, t2):
     """タイトルの柔軟なマッチング"""
     def norm(t):
-        return re.sub(r'[　\s～〜・！？!?\-\[\]【】「」『』（）()＆&]+', '', t).lower()
+        return re.sub(r'[　\s～〜・！？!?\-\[\]【】「」『』（）()＆&♡♥]+', '', t).lower()
     n1, n2 = norm(t1), norm(t2)
     if n1 == n2:
         return True
@@ -213,22 +256,25 @@ def match_titles(t1, t2):
     return False
 
 
-def cross_match(dlsite_items, fanza_items):
+def cross_match(dlsite_items, fanza_ranking, fanza_compare):
     """双方向のマッチング"""
+    # DLsite比較用: ランキング + 比較用の全FANZAデータを使う
+    all_fanza = fanza_ranking + fanza_compare
+
     dl_matched = 0
     fz_matched = 0
 
-    # DLsite → FANZA
+    # DLsite → FANZA（全FANZAデータから検索）
     for dl in dlsite_items:
-        for fz in fanza_items:
+        for fz in all_fanza:
             if match_titles(dl['title'], fz['title']):
                 dl['rivalPrice'] = fz['price']
                 dl['rivalUrl'] = fz['url']
                 dl_matched += 1
                 break
 
-    # FANZA → DLsite
-    for fz in fanza_items:
+    # FANZA → DLsite（ランキング作品のみ）
+    for fz in fanza_ranking:
         for dl in dlsite_items:
             if match_titles(fz['title'], dl['title']):
                 fz['rivalPrice'] = dl['price']
@@ -259,20 +305,20 @@ def main():
     fanza_affiliate_id = os.environ.get('FANZA_AFFILIATE_ID', '')
 
     if fanza_api_id and fanza_affiliate_id:
-        fanza_items = load_fanza_api(fanza_api_id, fanza_affiliate_id)
+        fanza_ranking, fanza_compare = load_fanza_api(fanza_api_id, fanza_affiliate_id)
         fanza_method = 'api'
     else:
-        fanza_items = load_fanza_manual()
+        fanza_ranking, fanza_compare = load_fanza_manual()
         fanza_method = 'manual'
 
     # 双方向マッチング
-    cross_match(dlsite_items, fanza_items)
+    cross_match(dlsite_items, fanza_ranking, fanza_compare)
 
     output = {
         'updatedAt': datetime.now().strftime('%Y/%m/%d %H:%M'),
         'fanzaMethod': fanza_method,
         'dlsiteItems': dlsite_items,
-        'fanzaItems': fanza_items,
+        'fanzaItems': fanza_ranking,  # ランキング作品のみ
     }
 
     with open('data.json', 'w', encoding='utf-8') as f:
@@ -280,7 +326,8 @@ def main():
 
     print(f"\n===== 完了 =====")
     print(f"DLsite: {len(dlsite_items)}件")
-    print(f"FANZA: {len(fanza_items)}件")
+    print(f"FANZA ランキング: {len(fanza_ranking)}件")
+    print(f"FANZA 比較用: {len(fanza_compare)}件")
 
 
 if __name__ == '__main__':
