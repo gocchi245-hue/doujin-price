@@ -1,9 +1,28 @@
 {
-  "updatedAt": "2026/06/27 06:33",
+  "updatedAt": "2026/06/28 07:06",
   "fanzaMethod": "manual",
   "dlsiteItems": [
     {
       "rank": 1,
+      "title": "ドキドキ!性感マッサージ【タツ姐編+本編カラー化DLC】",
+      "circle": "ツインテール教",
+      "genre": "音声",
+      "price": 1496,
+      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01652280.html",
+      "productId": "RJ01652280",
+      "tags": [
+        "登録",
+        "R18",
+        "シミュレーション",
+        "音声あり",
+        "音楽あり"
+      ],
+      "emoji": "🎵",
+      "rivalPrice": null,
+      "rivalUrl": ""
+    },
+    {
+      "rank": 2,
       "title": "リスタリア - 階級・領地・女。すべてを掴む成り上がりストーリー -",
       "circle": "らて茶場",
       "genre": "RPG",
@@ -22,7 +41,7 @@
       "rivalUrl": ""
     },
     {
-      "rank": 2,
+      "rank": 3,
       "title": "神の血:The Blood of Yidhra",
       "circle": "WhitePeach",
       "genre": "音声",
@@ -41,7 +60,7 @@
       "rivalUrl": ""
     },
     {
-      "rank": 3,
+      "rank": 4,
       "title": "レピテーション！",
       "circle": "ミューテーション",
       "genre": "RPG",
@@ -56,25 +75,6 @@
         "アプリケーション"
       ],
       "emoji": "⚔️",
-      "rivalPrice": null,
-      "rivalUrl": ""
-    },
-    {
-      "rank": 4,
-      "title": "サキュバス・ショーダウン！",
-      "circle": "おっぱい工房",
-      "genre": "その他",
-      "price": 891,
-      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01654810.html",
-      "productId": "RJ01654810",
-      "tags": [
-        "登録",
-        "R18",
-        "その他ゲーム",
-        "音楽あり",
-        "アプリケーション"
-      ],
-      "emoji": "📄",
       "rivalPrice": null,
       "rivalUrl": ""
     },
@@ -99,62 +99,6 @@
     },
     {
       "rank": 6,
-      "title": "幻想娼館 -天狗の廓-",
-      "circle": "ぴょんぴょんぴょん",
-      "genre": "音声",
-      "price": 1980,
-      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01392979.html",
-      "productId": "RJ01392979",
-      "tags": [
-        "登録",
-        "R18",
-        "シミュレーション",
-        "音声あり",
-        "音楽あり"
-      ],
-      "emoji": "🎵",
-      "rivalPrice": null,
-      "rivalUrl": ""
-    },
-    {
-      "rank": 7,
-      "title": "え～♡彼女さんキビシ～♡",
-      "circle": "えもこ本舗",
-      "genre": "音声",
-      "price": 1001,
-      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01649780.html",
-      "productId": "RJ01649780",
-      "tags": [
-        "登録",
-        "R-15",
-        "ボイス・ASMR",
-        "WAV"
-      ],
-      "emoji": "🎵",
-      "rivalPrice": null,
-      "rivalUrl": ""
-    },
-    {
-      "rank": 8,
-      "title": "青の結納",
-      "circle": "炭火焼ぽんたん",
-      "genre": "RPG",
-      "price": 1496,
-      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01584506.html",
-      "productId": "RJ01584506",
-      "tags": [
-        "登録",
-        "R18",
-        "ロールプレイング",
-        "音楽あり",
-        "アプリケーション"
-      ],
-      "emoji": "⚔️",
-      "rivalPrice": null,
-      "rivalUrl": ""
-    },
-    {
-      "rank": 9,
       "title": "理想のひきこもり生活 ラブホDLC",
       "circle": "猫3",
       "genre": "音声",
@@ -173,83 +117,82 @@
       "rivalUrl": ""
     },
     {
-      "rank": 10,
-      "title": "フレイヤのポーション屋",
-      "circle": "戦争屋さん",
-      "genre": "RPG",
-      "price": 1584,
-      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01633285.html",
-      "productId": "RJ01633285",
+      "rank": 7,
+      "title": "ドキドキ!性感マッサージ",
+      "circle": "ツインテール教",
+      "genre": "音声",
+      "price": 605,
+      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01437730.html",
+      "productId": "RJ01437730",
       "tags": [
         "登録",
         "R18",
-        "ロールプレイング",
+        "シミュレーション",
         "音声あり",
         "音楽あり"
       ],
-      "emoji": "⚔️",
+      "emoji": "🎵",
+      "rivalPrice": null,
+      "rivalUrl": ""
+    },
+    {
+      "rank": 8,
+      "title": "え～♡彼女さんキビシ～♡",
+      "circle": "えもこ本舗",
+      "genre": "音声",
+      "price": 1001,
+      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01649780.html",
+      "productId": "RJ01649780",
+      "tags": [
+        "登録",
+        "R-15",
+        "ボイス・ASMR",
+        "WAV"
+      ],
+      "emoji": "🎵",
+      "rivalPrice": null,
+      "rivalUrl": ""
+    },
+    {
+      "rank": 9,
+      "title": "幻想娼館 -天狗の廓-",
+      "circle": "ぴょんぴょんぴょん",
+      "genre": "音声",
+      "price": 1980,
+      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01392979.html",
+      "productId": "RJ01392979",
+      "tags": [
+        "登録",
+        "R18",
+        "シミュレーション",
+        "音声あり",
+        "音楽あり"
+      ],
+      "emoji": "🎵",
+      "rivalPrice": null,
+      "rivalUrl": ""
+    },
+    {
+      "rank": 10,
+      "title": "サキュバス・ショーダウン！",
+      "circle": "おっぱい工房",
+      "genre": "その他",
+      "price": 891,
+      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01654810.html",
+      "productId": "RJ01654810",
+      "tags": [
+        "登録",
+        "R18",
+        "その他ゲーム",
+        "音楽あり",
+        "アプリケーション"
+      ],
+      "emoji": "📄",
       "rivalPrice": null,
       "rivalUrl": ""
     },
     {
       "rank": 11,
-      "title": "逆夢のメナスフィア",
-      "circle": "クレイジー二厘",
-      "genre": "RPG",
-      "price": 1694,
-      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01274832.html",
-      "productId": "RJ01274832",
-      "tags": [
-        "登録",
-        "R18",
-        "ロールプレイング",
-        "音楽あり",
-        "アプリケーション"
-      ],
-      "emoji": "⚔️",
-      "rivalPrice": null,
-      "rivalUrl": ""
-    },
-    {
-      "rank": 12,
-      "title": "異世界モン娘悦楽記",
-      "circle": "ぺぺろーん",
-      "genre": "RPG",
-      "price": 1144,
-      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01624141.html",
-      "productId": "RJ01624141",
-      "tags": [
-        "登録",
-        "R18",
-        "ロールプレイング",
-        "音声あり",
-        "音楽あり"
-      ],
-      "emoji": "⚔️",
-      "rivalPrice": null,
-      "rivalUrl": ""
-    },
-    {
-      "rank": 13,
-      "title": "汝は淫魔なりや?II～Forbidden Temptation～",
-      "circle": "にゅうステーション",
-      "genre": "RPG",
-      "price": 1144,
-      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01652829.html",
-      "productId": "RJ01652829",
-      "tags": [
-        "登録",
-        "R18",
-        "ロールプレイング",
-        "音楽あり",
-        "アプリケーション"
-      ],
-      "emoji": "⚔️",
-      "rivalPrice": null,
-      "rivalUrl": ""
-    },
-    {
-      "rank": 14,
       "title": "復讐の夜霧",
       "circle": "beebee工房",
       "genre": "音声",
@@ -268,7 +211,102 @@
       "rivalUrl": ""
     },
     {
+      "rank": 12,
+      "title": "理想のひきこもり生活 ～父娘イチャイチャ同棲～",
+      "circle": "猫3",
+      "genre": "音声",
+      "price": 1650,
+      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01452526.html",
+      "productId": "RJ01452526",
+      "tags": [
+        "登録",
+        "R18",
+        "シミュレーション",
+        "音声あり",
+        "音楽あり"
+      ],
+      "emoji": "🎵",
+      "rivalPrice": null,
+      "rivalUrl": ""
+    },
+    {
+      "rank": 13,
+      "title": "逆夢のメナスフィア",
+      "circle": "クレイジー二厘",
+      "genre": "RPG",
+      "price": 1694,
+      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01274832.html",
+      "productId": "RJ01274832",
+      "tags": [
+        "登録",
+        "R18",
+        "ロールプレイング",
+        "音楽あり",
+        "アプリケーション"
+      ],
+      "emoji": "⚔️",
+      "rivalPrice": null,
+      "rivalUrl": ""
+    },
+    {
+      "rank": 14,
+      "title": "寝耳へ恋の果報",
+      "circle": "多摩尾庵",
+      "genre": "マンガ",
+      "price": 495,
+      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01107306.html",
+      "productId": "RJ01107306",
+      "tags": [
+        "登録",
+        "R18",
+        "マンガ",
+        "JPEG",
+        "PDF同梱"
+      ],
+      "emoji": "📚",
+      "rivalPrice": null,
+      "rivalUrl": ""
+    },
+    {
       "rank": 15,
+      "title": "フレイヤのポーション屋",
+      "circle": "戦争屋さん",
+      "genre": "RPG",
+      "price": 1584,
+      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01633285.html",
+      "productId": "RJ01633285",
+      "tags": [
+        "登録",
+        "R18",
+        "ロールプレイング",
+        "音声あり",
+        "音楽あり"
+      ],
+      "emoji": "⚔️",
+      "rivalPrice": null,
+      "rivalUrl": ""
+    },
+    {
+      "rank": 16,
+      "title": "汝は淫魔なりや?II～Forbidden Temptation～",
+      "circle": "にゅうステーション",
+      "genre": "RPG",
+      "price": 1144,
+      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01652829.html",
+      "productId": "RJ01652829",
+      "tags": [
+        "登録",
+        "R18",
+        "ロールプレイング",
+        "音楽あり",
+        "アプリケーション"
+      ],
+      "emoji": "⚔️",
+      "rivalPrice": null,
+      "rivalUrl": ""
+    },
+    {
+      "rank": 17,
       "title": "小夜ちゃんの未練解消日記2 ～ドスケベ幽霊女子は優しいえっちじゃものたりない！～",
       "circle": "あたたけ工房",
       "genre": "音声",
@@ -287,7 +325,7 @@
       "rivalUrl": ""
     },
     {
-      "rank": 16,
+      "rank": 18,
       "title": "極道無頼EX:女警・鮎川光--処女が変態に変わる分かれ道",
       "circle": "WAKUWAKU",
       "genre": "音声",
@@ -306,32 +344,32 @@
       "rivalUrl": ""
     },
     {
-      "rank": 17,
-      "title": "エロトラップメンテのお仕事EX2 〜福利厚生が良すぎて、エロトラップとは無関係なところでヤレてもいいよね〜",
-      "circle": "にゅう工房",
-      "genre": "マンガ",
-      "price": 968,
-      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01621951.html",
-      "productId": "RJ01621951",
+      "rank": 19,
+      "title": "青の結納",
+      "circle": "炭火焼ぽんたん",
+      "genre": "RPG",
+      "price": 1496,
+      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01584506.html",
+      "productId": "RJ01584506",
       "tags": [
         "登録",
         "R18",
-        "マンガ",
-        "JPEG",
-        "マニアック/変態"
+        "ロールプレイング",
+        "音楽あり",
+        "アプリケーション"
       ],
-      "emoji": "📚",
+      "emoji": "⚔️",
       "rivalPrice": null,
       "rivalUrl": ""
     },
     {
-      "rank": 18,
-      "title": "ソムニウム -昏き迷宮にて紡がれる願い-",
-      "circle": "アトリエわんこ",
+      "rank": 20,
+      "title": "異世界モン娘悦楽記",
+      "circle": "ぺぺろーん",
       "genre": "RPG",
-      "price": 3465,
-      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01650691.html",
-      "productId": "RJ01650691",
+      "price": 1144,
+      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01624141.html",
+      "productId": "RJ01624141",
       "tags": [
         "登録",
         "R18",
@@ -344,51 +382,13 @@
       "rivalUrl": ""
     },
     {
-      "rank": 19,
-      "title": "耀忍咲姫 影華",
-      "circle": "CARYO",
-      "genre": "音声",
-      "price": 1485,
-      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01637416.html",
-      "productId": "RJ01637416",
-      "tags": [
-        "登録",
-        "R18",
-        "シミュレーション",
-        "音声あり",
-        "音楽あり"
-      ],
-      "emoji": "🎵",
-      "rivalPrice": null,
-      "rivalUrl": ""
-    },
-    {
-      "rank": 20,
-      "title": "有望能力者が絶頂シミュで触手に敗かされる話",
-      "circle": "珠寿司",
-      "genre": "マンガ",
-      "price": 792,
-      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01646501.html",
-      "productId": "RJ01646501",
-      "tags": [
-        "登録",
-        "R18",
-        "マンガ",
-        "PNG",
-        "着衣"
-      ],
-      "emoji": "📚",
-      "rivalPrice": null,
-      "rivalUrl": ""
-    },
-    {
       "rank": 21,
-      "title": "RJ01452526",
+      "title": "RJ01637416",
       "circle": "",
       "genre": "その他",
       "price": 0,
-      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01452526.html",
-      "productId": "RJ01452526",
+      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01637416.html",
+      "productId": "RJ01637416",
       "tags": [],
       "emoji": "📄",
       "rivalPrice": null,
@@ -396,12 +396,12 @@
     },
     {
       "rank": 22,
-      "title": "RJ01377481",
+      "title": "RJ01621951",
       "circle": "",
       "genre": "その他",
       "price": 0,
-      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01377481.html",
-      "productId": "RJ01377481",
+      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01621951.html",
+      "productId": "RJ01621951",
       "tags": [],
       "emoji": "📄",
       "rivalPrice": null,
@@ -409,19 +409,6 @@
     },
     {
       "rank": 23,
-      "title": "RJ01648369",
-      "circle": "",
-      "genre": "その他",
-      "price": 0,
-      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01648369.html",
-      "productId": "RJ01648369",
-      "tags": [],
-      "emoji": "📄",
-      "rivalPrice": null,
-      "rivalUrl": ""
-    },
-    {
-      "rank": 24,
       "title": "RJ01412576",
       "circle": "",
       "genre": "その他",
@@ -434,13 +421,26 @@
       "rivalUrl": ""
     },
     {
-      "rank": 25,
-      "title": "RJ01629280",
+      "rank": 24,
+      "title": "RJ01377481",
       "circle": "",
       "genre": "その他",
       "price": 0,
-      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01629280.html",
-      "productId": "RJ01629280",
+      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01377481.html",
+      "productId": "RJ01377481",
+      "tags": [],
+      "emoji": "📄",
+      "rivalPrice": null,
+      "rivalUrl": ""
+    },
+    {
+      "rank": 25,
+      "title": "RJ01486250",
+      "circle": "",
+      "genre": "その他",
+      "price": 0,
+      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01486250.html",
+      "productId": "RJ01486250",
       "tags": [],
       "emoji": "📄",
       "rivalPrice": null,
@@ -448,12 +448,12 @@
     },
     {
       "rank": 26,
-      "title": "RJ01652997",
+      "title": "RJ01650691",
       "circle": "",
       "genre": "その他",
       "price": 0,
-      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01652997.html",
-      "productId": "RJ01652997",
+      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01650691.html",
+      "productId": "RJ01650691",
       "tags": [],
       "emoji": "📄",
       "rivalPrice": null,
@@ -461,19 +461,6 @@
     },
     {
       "rank": 27,
-      "title": "RJ01646847",
-      "circle": "",
-      "genre": "その他",
-      "price": 0,
-      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01646847.html",
-      "productId": "RJ01646847",
-      "tags": [],
-      "emoji": "📄",
-      "rivalPrice": null,
-      "rivalUrl": ""
-    },
-    {
-      "rank": 28,
       "title": "RJ01569452",
       "circle": "",
       "genre": "その他",
@@ -486,13 +473,26 @@
       "rivalUrl": ""
     },
     {
-      "rank": 29,
-      "title": "RJ01657316",
+      "rank": 28,
+      "title": "RJ01638386",
       "circle": "",
       "genre": "その他",
       "price": 0,
-      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01657316.html",
-      "productId": "RJ01657316",
+      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01638386.html",
+      "productId": "RJ01638386",
+      "tags": [],
+      "emoji": "📄",
+      "rivalPrice": null,
+      "rivalUrl": ""
+    },
+    {
+      "rank": 29,
+      "title": "RJ01169914",
+      "circle": "",
+      "genre": "その他",
+      "price": 0,
+      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01169914.html",
+      "productId": "RJ01169914",
       "tags": [],
       "emoji": "📄",
       "rivalPrice": null,
@@ -500,12 +500,12 @@
     },
     {
       "rank": 30,
-      "title": "RJ01611071",
+      "title": "RJ01657316",
       "circle": "",
       "genre": "その他",
       "price": 0,
-      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01611071.html",
-      "productId": "RJ01611071",
+      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01657316.html",
+      "productId": "RJ01657316",
       "tags": [],
       "emoji": "📄",
       "rivalPrice": null,
