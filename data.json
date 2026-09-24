@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026/09/23 08:22",
+  "updatedAt": "2026/09/24 08:15",
   "fanzaMethod": "manual",
   "dlsiteItems": [
     {
@@ -61,12 +61,12 @@
     },
     {
       "rank": 4,
-      "title": "パンドラ・ケージ～宇宙調査員の恋人は触手生物に寝取られる～",
-      "circle": "新世界寄り",
+      "title": "爆弾解体",
+      "circle": "キツネマフラー",
       "genre": "音声",
-      "price": 1925,
-      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01709277.html",
-      "productId": "RJ01709277",
+      "price": 1584,
+      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01664642.html",
+      "productId": "RJ01664642",
       "tags": [
         "登録",
         "R18",
@@ -118,25 +118,6 @@
     },
     {
       "rank": 7,
-      "title": "爆弾解体",
-      "circle": "キツネマフラー",
-      "genre": "音声",
-      "price": 1584,
-      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01664642.html",
-      "productId": "RJ01664642",
-      "tags": [
-        "登録",
-        "R18",
-        "シミュレーション",
-        "音声あり",
-        "音楽あり"
-      ],
-      "emoji": "🎵",
-      "rivalPrice": null,
-      "rivalUrl": ""
-    },
-    {
-      "rank": 8,
       "title": "特命少女アイギス・ブルー",
       "circle": "No Future",
       "genre": "音声",
@@ -147,6 +128,25 @@
         "登録",
         "R18",
         "デジタルノベル",
+        "音声あり",
+        "音楽あり"
+      ],
+      "emoji": "🎵",
+      "rivalPrice": null,
+      "rivalUrl": ""
+    },
+    {
+      "rank": 8,
+      "title": "パンドラ・ケージ～宇宙調査員の恋人は触手生物に寝取られる～",
+      "circle": "新世界寄り",
+      "genre": "音声",
+      "price": 1925,
+      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01709277.html",
+      "productId": "RJ01709277",
+      "tags": [
+        "登録",
+        "R18",
+        "シミュレーション",
         "音声あり",
         "音楽あり"
       ],
@@ -213,25 +213,6 @@
     },
     {
       "rank": 12,
-      "title": "THE TOWER ～コントラクト～",
-      "circle": "scoutswren",
-      "genre": "RPG",
-      "price": 1144,
-      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01696828.html",
-      "productId": "RJ01696828",
-      "tags": [
-        "登録",
-        "R18",
-        "ロールプレイング",
-        "音楽あり",
-        "アプリケーション"
-      ],
-      "emoji": "⚔️",
-      "rivalPrice": null,
-      "rivalUrl": ""
-    },
-    {
-      "rank": 13,
       "title": "【10/10日まで 早期限定340大特典】～孕ませアトリエ～ 見習い錬金術師のボクと…ドスケベ爆乳女錬金術師×3による♪…秘密の子作り孕ませアトリエ♪",
       "circle": "マヨタマ",
       "genre": "音声",
@@ -250,26 +231,7 @@
       "rivalUrl": ""
     },
     {
-      "rank": 14,
-      "title": "にゃくろのみこん！",
-      "circle": "くろごまナイツ",
-      "genre": "RPG",
-      "price": 1650,
-      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01519862.html",
-      "productId": "RJ01519862",
-      "tags": [
-        "登録",
-        "R18",
-        "ロールプレイング",
-        "音楽あり",
-        "アプリケーション"
-      ],
-      "emoji": "⚔️",
-      "rivalPrice": null,
-      "rivalUrl": ""
-    },
-    {
-      "rank": 15,
+      "rank": 13,
       "title": "魔法少女シルフィーナ",
       "circle": "るーむ二号",
       "genre": "RPG",
@@ -288,7 +250,7 @@
       "rivalUrl": ""
     },
     {
-      "rank": 16,
+      "rank": 14,
       "title": "敗北妄想シスターのクリ責めマゾ治療",
       "circle": "猫作ランド",
       "genre": "CG集",
@@ -307,13 +269,32 @@
       "rivalUrl": ""
     },
     {
-      "rank": 17,
-      "title": "にゃくろのみこん！DLC",
-      "circle": "くろごまナイツ",
+      "rank": 15,
+      "title": "THE TOWER ～コントラクト～",
+      "circle": "scoutswren",
       "genre": "RPG",
-      "price": 550,
-      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01696518.html",
-      "productId": "RJ01696518",
+      "price": 1144,
+      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01696828.html",
+      "productId": "RJ01696828",
+      "tags": [
+        "登録",
+        "R18",
+        "ロールプレイング",
+        "音楽あり",
+        "アプリケーション"
+      ],
+      "emoji": "⚔️",
+      "rivalPrice": null,
+      "rivalUrl": ""
+    },
+    {
+      "rank": 16,
+      "title": "雪音の仇討ち物語",
+      "circle": "傾世遊庵",
+      "genre": "RPG",
+      "price": 2057,
+      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01612664.html",
+      "productId": "RJ01612664",
       "tags": [
         "登録",
         "R18",
@@ -326,21 +307,40 @@
       "rivalUrl": ""
     },
     {
-      "rank": 18,
-      "title": "ゴブリンの巣窟に囚われて―メメリスとティーナの抗えぬ刻印―",
-      "circle": "メメリスチャンネル",
-      "genre": "マンガ",
-      "price": 792,
-      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01702943.html",
-      "productId": "RJ01702943",
+      "rank": 17,
+      "title": "にゃくろのみこん！",
+      "circle": "くろごまナイツ",
+      "genre": "RPG",
+      "price": 1650,
+      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01519862.html",
+      "productId": "RJ01519862",
       "tags": [
         "登録",
         "R18",
-        "マンガ",
-        "JPEG",
-        "連続絶頂"
+        "ロールプレイング",
+        "音楽あり",
+        "アプリケーション"
       ],
-      "emoji": "📚",
+      "emoji": "⚔️",
+      "rivalPrice": null,
+      "rivalUrl": ""
+    },
+    {
+      "rank": 18,
+      "title": "女の子扱い乳首オナサポ♡乳首の快感に屈服して、大好きな女の子に一生依存させられちゃう音声…【本番なし♡】",
+      "circle": "ぷにぷにぱんち",
+      "genre": "音声",
+      "price": 1144,
+      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01705214.html",
+      "productId": "RJ01705214",
+      "tags": [
+        "登録",
+        "R18",
+        "ボイス・ASMR",
+        "WAV",
+        "オナサポ"
+      ],
+      "emoji": "🎵",
       "rivalPrice": null,
       "rivalUrl": ""
     },
@@ -365,31 +365,31 @@
     },
     {
       "rank": 20,
-      "title": "モブ娘ギルドメーカー",
-      "circle": "おいなりソフト(肩引こ)",
-      "genre": "音声",
-      "price": 1386,
-      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01710819.html",
-      "productId": "RJ01710819",
+      "title": "ゴブリンの巣窟に囚われて―メメリスとティーナの抗えぬ刻印―",
+      "circle": "メメリスチャンネル",
+      "genre": "マンガ",
+      "price": 792,
+      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01702943.html",
+      "productId": "RJ01702943",
       "tags": [
         "登録",
         "R18",
-        "シミュレーション",
-        "音声あり",
-        "音楽あり"
+        "マンガ",
+        "JPEG",
+        "連続絶頂"
       ],
-      "emoji": "🎵",
+      "emoji": "📚",
       "rivalPrice": null,
       "rivalUrl": ""
     },
     {
       "rank": 21,
-      "title": "RJ01612664",
+      "title": "RJ01710819",
       "circle": "",
       "genre": "その他",
       "price": 0,
-      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01612664.html",
-      "productId": "RJ01612664",
+      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01710819.html",
+      "productId": "RJ01710819",
       "tags": [],
       "emoji": "📄",
       "rivalPrice": null,
@@ -397,6 +397,19 @@
     },
     {
       "rank": 22,
+      "title": "RJ01726233",
+      "circle": "",
+      "genre": "その他",
+      "price": 0,
+      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01726233.html",
+      "productId": "RJ01726233",
+      "tags": [],
+      "emoji": "📄",
+      "rivalPrice": null,
+      "rivalUrl": ""
+    },
+    {
+      "rank": 23,
       "title": "RJ01702695",
       "circle": "",
       "genre": "その他",
@@ -409,7 +422,46 @@
       "rivalUrl": ""
     },
     {
-      "rank": 23,
+      "rank": 24,
+      "title": "RJ01612168",
+      "circle": "",
+      "genre": "その他",
+      "price": 0,
+      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01612168.html",
+      "productId": "RJ01612168",
+      "tags": [],
+      "emoji": "📄",
+      "rivalPrice": null,
+      "rivalUrl": ""
+    },
+    {
+      "rank": 25,
+      "title": "RJ01696518",
+      "circle": "",
+      "genre": "その他",
+      "price": 0,
+      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01696518.html",
+      "productId": "RJ01696518",
+      "tags": [],
+      "emoji": "📄",
+      "rivalPrice": null,
+      "rivalUrl": ""
+    },
+    {
+      "rank": 26,
+      "title": "RJ01365103",
+      "circle": "",
+      "genre": "その他",
+      "price": 0,
+      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01365103.html",
+      "productId": "RJ01365103",
+      "tags": [],
+      "emoji": "📄",
+      "rivalPrice": null,
+      "rivalUrl": ""
+    },
+    {
+      "rank": 27,
       "title": "RJ01529614",
       "circle": "",
       "genre": "その他",
@@ -422,7 +474,20 @@
       "rivalUrl": ""
     },
     {
-      "rank": 24,
+      "rank": 28,
+      "title": "RJ01704024",
+      "circle": "",
+      "genre": "その他",
+      "price": 0,
+      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01704024.html",
+      "productId": "RJ01704024",
+      "tags": [],
+      "emoji": "📄",
+      "rivalPrice": null,
+      "rivalUrl": ""
+    },
+    {
+      "rank": 29,
       "title": "RJ01675713",
       "circle": "",
       "genre": "その他",
@@ -435,78 +500,13 @@
       "rivalUrl": ""
     },
     {
-      "rank": 25,
-      "title": "RJ01697849",
-      "circle": "",
-      "genre": "その他",
-      "price": 0,
-      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01697849.html",
-      "productId": "RJ01697849",
-      "tags": [],
-      "emoji": "📄",
-      "rivalPrice": null,
-      "rivalUrl": ""
-    },
-    {
-      "rank": 26,
+      "rank": 30,
       "title": "RJ01556529",
       "circle": "",
       "genre": "その他",
       "price": 0,
       "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01556529.html",
       "productId": "RJ01556529",
-      "tags": [],
-      "emoji": "📄",
-      "rivalPrice": null,
-      "rivalUrl": ""
-    },
-    {
-      "rank": 27,
-      "title": "RJ01442791",
-      "circle": "",
-      "genre": "その他",
-      "price": 0,
-      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01442791.html",
-      "productId": "RJ01442791",
-      "tags": [],
-      "emoji": "📄",
-      "rivalPrice": null,
-      "rivalUrl": ""
-    },
-    {
-      "rank": 28,
-      "title": "RJ01550550",
-      "circle": "",
-      "genre": "その他",
-      "price": 0,
-      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01550550.html",
-      "productId": "RJ01550550",
-      "tags": [],
-      "emoji": "📄",
-      "rivalPrice": null,
-      "rivalUrl": ""
-    },
-    {
-      "rank": 29,
-      "title": "RJ01657665",
-      "circle": "",
-      "genre": "その他",
-      "price": 0,
-      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01657665.html",
-      "productId": "RJ01657665",
-      "tags": [],
-      "emoji": "📄",
-      "rivalPrice": null,
-      "rivalUrl": ""
-    },
-    {
-      "rank": 30,
-      "title": "RJ01721496",
-      "circle": "",
-      "genre": "その他",
-      "price": 0,
-      "url": "https://www.dlsite.com/maniax/work/=/product_id/RJ01721496.html",
-      "productId": "RJ01721496",
       "tags": [],
       "emoji": "📄",
       "rivalPrice": null,
